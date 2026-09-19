@@ -1,0 +1,19 @@
+id: social-media-cycle
+owner: Nina
+supervisor: Luna
+steps:
+  - load_brand_context
+  - research_market_and_competitors
+  - inspect_channel_metrics
+  - define_content_plan
+  - create_calendar
+  - draft_copy
+  - request_or_create_assets
+  - brand_qa
+  - approval_gate
+  - publish_or_schedule
+  - monitor_comments_and_metrics
+  - report_learnings
+  - update_memory
+connectors: [social,analytics,storage]
+fallback: browser-computer-use
