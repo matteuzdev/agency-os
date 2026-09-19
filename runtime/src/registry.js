@@ -1,0 +1,1 @@
+export class ConnectorRegistry{constructor(){this.items=new Map()}register(connector){if(!connector?.family)throw new Error("connector family required");this.items.set(connector.family,connector);return this}get(family){return this.items.get(family)}has(family){return this.items.has(family)}asObject(){return Object.fromEntries(this.items)}}
