@@ -1,0 +1,19 @@
+id: vps-operations
+owner: Bruno
+specialists: [Nix,Dock,Sentinel,Vault,Pulse]
+steps:
+  - inventory_server
+  - capture_current_state
+  - assess_security_and_exposure
+  - assess_resources_and_capacity
+  - inspect_services_and_containers
+  - inspect_backup_and_restore_readiness
+  - define_change_plan
+  - define_rollback_plan
+  - approval_gate_if_risky
+  - execute_change
+  - verify_services
+  - verify_security
+  - collect_execution_receipt
+  - update_infrastructure_memory
+connectors: [ssh,container-runtime,dns,monitoring,backup,deployment]
