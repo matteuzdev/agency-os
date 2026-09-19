@@ -1,0 +1,5 @@
+id: sales-crm-cycle
+owner: Clara
+specialists: [Alex,Sam,Marco,Jade,Emma,Elise]
+steps: [define_icp,source_leads,enrich,qualify,prepare_contextual_outreach,approval_or_policy_gate,contact,handle_replies,update_pipeline,follow_up,close_or_nurture,measure,update_memory]
+connectors: [crm,email,messaging]
