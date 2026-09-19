@@ -9,7 +9,7 @@ export class OfficeScene extends Phaser.Scene{
     this.blocked=new Set(AGENTS.map(a=>keyOf(a.gx,a.gy)));
     this.agentObjects=new Map();
     this.walking=false;
-    this.playerGrid={gx:12,gy:6};
+    this.playerGrid={gx:26,gy:4};\n    this.agentHomes=new Map();\n    this.meetingParticipants=new Set();
     this.selectedMarker=this.add.graphics().setDepth(5);
 
     drawWorld(this);
@@ -17,7 +17,7 @@ export class OfficeScene extends Phaser.Scene{
     this.createPlayer();
     this.createInput();
 
-    this.cameras.main.setBounds(0,0,1600,930);
+    this.cameras.main.setBounds(0,0,2050,1100);
     this.cameras.main.startFollow(this.player,true,.08,.08);
     this.cameras.main.setDeadzone(220,160);
 
@@ -26,6 +26,7 @@ export class OfficeScene extends Phaser.Scene{
     this.updateInteraction();
 
     this.time.addEvent({delay:2600,loop:true,callback:()=>this.animateOfficeLife()});
+    this.time.addEvent({delay:4200,loop:true,callback:()=>this.emitAgentActivity()});
     window.dispatchEvent(new CustomEvent("agency:log",{detail:{agent:"SYSTEM",action:"GAME_BOOT",detail:"Living Office isométrico iniciado."}}));
   }
 
@@ -38,7 +39,7 @@ export class OfficeScene extends Phaser.Scene{
         if(pointer.event?.stopPropagation)pointer.event.stopPropagation();
         this.walkToAgent(agent);
       });
-      this.agentObjects.set(agent.name,obj);
+      this.agentObjects.set(agent.name,obj);\n      this.agentHomes.set(agent.name,{x:obj.x,y:obj.y,gx:agent.gx,gy:agent.gy});
       if(agent.status==="working"){
         this.tweens.add({targets:obj,y:obj.y-2,duration:850+Math.random()*450,yoyo:true,repeat:-1,ease:"Sine.easeInOut"});
       }
@@ -200,6 +201,69 @@ export class OfficeScene extends Phaser.Scene{
     const label=this.add.text((a.x+b.x)/2,(a.y+b.y)/2-35,"HANDOFF → "+to.name,{fontFamily:"Arial",fontSize:"12px",fontStyle:"bold",color:"#fff",backgroundColor:"#3b265dcc",padding:{x:7,y:4}}).setOrigin(.5).setDepth(11600);
     this.tweens.add({targets:[g,label],alpha:0,delay:2200,duration:800,onComplete:()=>{g.destroy();label.destroy();}});
     this.showSpeech(from,"Passando para "+to.name+": "+reason);
+  }
+
+  focusRoom(id){
+    const centers={owner:{gx:26,gy:3,zoom:1.45},meeting:{gx:26,gy:10,zoom:1.35},office:{gx:12,gy:9,zoom:0.9}};
+    const target=centers[id]||centers.office;
+    const p=tileCenter(target.gx,target.gy);
+    this.cameras.main.stopFollow();
+    this.cameras.main.pan(p.x,p.y,550,"Sine.easeInOut");
+    this.cameras.main.zoomTo(target.zoom,550,"Sine.easeInOut");
+    if(id==="office")this.time.delayedCall(650,()=>this.cameras.main.startFollow(this.player,true,.08,.08));
+  }
+
+  summonToMeeting(names=[]){
+    const seats=[
+      {gx:25,gy:9},{gx:27,gy:9},{gx:25,gy:11},{gx:27,gy:11},
+      {gx:24,gy:10},{gx:28,gy:10},{gx:25,gy:12},{gx:27,gy:12}
+    ];
+    this.meetingParticipants.clear();
+    names.slice(0,seats.length).forEach((name,index)=>{
+      const agent=AGENTS.find(a=>a.name.toLowerCase()===String(name).toLowerCase());
+      const obj=agent&&this.agentObjects.get(agent.name);
+      if(!agent||!obj)return;
+      this.meetingParticipants.add(agent.name);
+      const seat=seats[index],p=tileCenter(seat.gx,seat.gy);
+      this.tweens.killTweensOf(obj);
+      this.tweens.add({targets:obj,x:p.x,y:p.y-5,duration:650+index*80,ease:"Sine.easeInOut",
+        onUpdate:()=>obj.setDepth((seat.gx+seat.gy)*100+80),
+        onComplete:()=>this.showSpeech(agent,"Cheguei para a reunião.")});
+    });
+    this.focusRoom("meeting");
+    window.dispatchEvent(new CustomEvent("agency:log",{detail:{agent:"Orion",action:"MEETING_SUMMON",detail:names.join(", ")}}));
+  }
+
+  endMeeting(){
+    for(const name of this.meetingParticipants){
+      const obj=this.agentObjects.get(name),home=this.agentHomes.get(name);
+      if(!obj||!home)continue;
+      this.tweens.add({targets:obj,x:home.x,y:home.y,duration:700,ease:"Sine.easeInOut",
+        onUpdate:()=>obj.setDepth((home.gx+home.gy)*100+80)});
+    }
+    this.meetingParticipants.clear();
+    this.focusRoom("owner");
+  }
+
+  emitAgentActivity(){
+    const active=AGENTS.filter(a=>a.status==="working");
+    if(!active.length)return;
+    const agent=Phaser.Utils.Array.GetRandom(active);
+    const actions={
+      strategy:["cruzando dados de mercado","refinando hipóteses","organizando evidências"],
+      content:["preparando material","revisando conteúdo","estruturando criativo"],
+      growth:["checando sinais de aquisição","analisando performance","mapeando oportunidades"],
+      web:["revisando experiência","checando implementação","trabalhando na conversão"],
+      sales:["atualizando pipeline","qualificando contexto","preparando próximo contato"],
+      ai:["orquestrando workflow","checando integração","preparando automação"],
+      qa:["auditando evidências","checando risco","validando entrega"],
+      infra:["checando infraestrutura","revisando observabilidade","validando segurança"],
+      orion:["coordenando handoffs","revisando Jobs","distribuindo prioridades"]
+    };
+    const list=actions[agent.dept]||["trabalhando na tarefa atual"];
+    const detail=list[Math.floor(Math.random()*list.length)];
+    this.showSpeech(agent,detail+"...");
+    window.dispatchEvent(new CustomEvent("agency:agent-action",{detail:{agent:agent.name,kind:"internal",action:detail,task:agent.task}}));
   }
 
   animateOfficeLife(){
