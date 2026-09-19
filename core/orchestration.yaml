@@ -1,0 +1,25 @@
+version: 0.1
+orchestrator: Orion
+planning:
+  1: normalize_request
+  2: resolve_client_context
+  3: identify_required_capabilities
+  4: create_job
+  5: decompose_tasks
+  6: route_to_leads
+  7: route_to_specialists
+  8: execute_dependency_graph
+  9: verify_outputs
+  10: apply_approval_policy
+  11: execute_external_actions
+  12: collect_receipts
+  13: measure
+  14: write_learnings
+delegation:
+  strategy: Maya
+  content_brand: Luna
+  acquisition: Atlas
+  web_conversion: Noah
+  sales_crm: Clara
+  ai_automation: Ada
+  qa_governance: Vera
