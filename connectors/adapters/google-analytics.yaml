@@ -1,0 +1,6 @@
+id: google-analytics
+family: analytics
+status: scaffold
+auth: oauth2
+capabilities: [read_events,read_conversions,read_funnels,read_attribution]
+required_runtime_config: [oauth_connection,property_selection]
