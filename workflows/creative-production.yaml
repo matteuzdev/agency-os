@@ -1,0 +1,7 @@
+id: creative-production
+owner: Mia
+supervisor: Luna
+collaborators: [Ravi,Leo,Bianca]
+steps: [load_brand_context,load_campaign_objective,select_angle,write_creative_brief,generate_or_edit_asset,creative_review,brand_review,revision_if_needed,export_asset,attach_to_job]
+native_capabilities: [image_generation,image_editing]
+outputs: [asset,creative_brief,copy_pairing,usage_notes]
