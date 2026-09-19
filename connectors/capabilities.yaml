@@ -12,4 +12,6 @@ capabilities:
   deployment: [build,preview,deploy,rollback]
   storage: [read_asset,write_asset,list_assets]
   automation: [create_workflow,run_workflow,read_run_status,retry_run]
-  browser_computer_use: [open,navigate,click,type,upload,download,read_screen]
+  browser_use: [open,navigate,snapshot,click,type,fill,select,press,scroll,wait,extract,screenshot,upload,download]
+  computer_use: [observe_screen,click,type,press,scroll,drag,select_file,read_screen,screenshot]
+  activity_stream: [emit_status,emit_tool_start,emit_tool_progress,emit_tool_result,emit_approval,emit_receipt]
