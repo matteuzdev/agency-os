@@ -1,0 +1,21 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"Agency OS Handoff Envelope",
+  "type":"object",
+  "required":["schema","created_at","source","client_id","from","to","intent","conversation"],
+  "properties":{
+    "schema":{"const":"agency-os/handoff-v0.1"},
+    "created_at":{"type":"string"},
+    "source":{"type":"string"},
+    "client_id":{"type":"string"},
+    "job_id":{"type":"string"},
+    "from":{"type":"string"},
+    "to":{"type":"string"},
+    "agent_role":{"type":"string"},
+    "current_task":{"type":"string"},
+    "intent":{"type":"string"},
+    "conversation":{"type":"array","items":{"type":"object"}},
+    "approval_context":{"type":"object"},
+    "return_to":{"type":"string"}
+  }
+}
