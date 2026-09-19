@@ -1,25 +1,53 @@
-# Agency OS Office
+# Agency OS Office Game
 
-Interface 2D experimental para viver a operação da agência.
+Escritório 2D jogável do Agency OS.
 
-## Objetivo
-Mostrar agentes, departamentos, tarefas, status, logs e conversas sem perder o contexto operacional do Agency OS.
+## O que existe agora
+- personagem do Hianto controlável por WASD/setas;
+- departamentos físicos e mesas;
+- agentes/NPCs no escritório;
+- aproximação + tecla E para conversar;
+- chat real via OpenAI API;
+- logs de operação;
+- handoff automático entre agentes;
+- Orion recebe registro dos handoffs;
+- configuração de modelo e chave de API;
+- histórico local de conversas, sem salvar a API key no localStorage.
 
-## Rodar
-Abra `office/index.html` no navegador, ou sirva a pasta com qualquer servidor estático.
+## Rodar localmente
+Sirva a pasta `office` com um servidor HTTP. O HTML sozinho funciona para o mapa, mas o chat de IA precisa do endpoint `/api/chat`.
 
-Exemplo:
-```bash
-npx serve office
+Com Vercel, use `office` como Root Directory.
+
+## IA na Vercel — recomendado
+Em Vercel → Project Settings → Environment Variables:
+
+```
+OPENAI_API_KEY=...
+OPENAI_MODEL=gpt-5.6-luna
 ```
 
-## Handoff é prioridade
-A interface NÃO finge que o navegador virou um LLM. Quando Hianto conversa com um agente:
-1. a mensagem fica persistida no navegador;
-2. o Office monta um `Handoff Envelope`;
-3. o pacote preserva cliente, Job, agente, tarefa, histórico e política de aprovação;
-4. o handoff pode ser enviado ao Orion localmente ou copiado para o ChatGPT;
-5. o runtime/ChatGPT continua o trabalho como o agente correto.
+O modelo também pode ser escolhido na interface.
 
-## Próxima integração
-Trocar o handoff manual por um endpoint autenticado do Agency OS runtime, para que mensagens do Office cheguem ao Orion e retornem ao painel em tempo real.
+## Chave temporária pela interface
+O botão `⚙ IA` abre a configuração. A chave digitada ali fica apenas na memória da aba e é enviada ao endpoint da própria aplicação. Ao recarregar a página, ela some.
+
+Para produção, prefira `OPENAI_API_KEY` na Vercel.
+
+## Handoff
+Quando um agente decide que outro especialista é mais adequado, a resposta pode gerar:
+
+```json
+{
+  "handoff": {
+    "to": "NomeDoAgente",
+    "reason": "motivo",
+    "message": "contexto transferido"
+  }
+}
+```
+
+O Office entrega o contexto ao agente de destino e registra a transferência para Orion.
+
+## Limite atual
+Os agentes já conversam por IA de verdade, mas ainda não possuem todas as ferramentas externas do runtime conectadas dentro do Office. A próxima camada é ligar chat → Job/Task → connectors → receipts/evidência.
