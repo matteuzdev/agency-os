@@ -1,53 +1,81 @@
-# Agency OS Office Game
+# Agency OS — Living Office
 
-Escritório 2D jogável do Agency OS.
+Escritório virtual isométrico e jogável do Agency OS.
 
-## O que existe agora
-- personagem do Hianto controlável por WASD/setas;
-- departamentos físicos e mesas;
-- agentes/NPCs no escritório;
-- aproximação + tecla E para conversar;
-- chat real via Vercel AI Gateway, permitindo múltiplos provedores/modelos;
-- logs de operação;
-- handoff automático entre agentes;
-- Orion recebe registro dos handoffs;
-- configuração de modelo e chave de API;
-- histórico local de conversas, sem salvar a AI Gateway key no localStorage.
+## Experiência
+- visão isométrica inspirada em jogos sociais de salas, sem copiar assets proprietários;
+- Phaser 3 como runtime 2D;
+- clique no chão para andar;
+- WASD/setas para movimentação;
+- pathfinding em grade;
+- mesas, salas, divisórias e agentes/NPCs;
+- aproxime-se e pressione E para conversar;
+- balões de fala e handoffs desenhados dentro do mapa;
+- logs operacionais e histórico por agente.
 
-## Rodar localmente
-Sirva a pasta `office` com um servidor HTTP. O HTML sozinho funciona para o mapa, mas o chat de IA precisa do endpoint `/api/chat`.
+## Inteligência multi-provider
 
-Com Vercel, use `office` como Root Directory.
+O Office não é preso à OpenAI.
 
-## IA na Vercel — recomendado
-Em Vercel → Project Settings → Environment Variables:
-
+### OpenRouter
+Na Vercel:
 ```
-OPENAI_API_KEY=...
-OPENAI_MODEL=gpt-5.6-luna
+OPENROUTER_API_KEY=...
 ```
 
-O modelo também pode ser escolhido na interface.
-
-## Chave temporária pela interface
-O botão `⚙ IA` abre a configuração. A chave digitada ali fica apenas na memória da aba e é enviada ao endpoint da própria aplicação. Ao recarregar a página, ela some.
-
-Se você usar a chave digitada no próprio Office, `AI_GATEWAY_API_KEY` pode simplesmente não existir. Não use `0`: seria tratado como uma credencial e falharia. Para uma implantação privada/produção, prefira o secret da Vercel.
-
-## Handoff
-Quando um agente decide que outro especialista é mais adequado, a resposta pode gerar:
-
-```json
-{
-  "handoff": {
-    "to": "NomeDoAgente",
-    "reason": "motivo",
-    "message": "contexto transferido"
-  }
-}
+No Office:
+```
+⚙ Inteligência
+Gateway: OpenRouter
+Modelo: openrouter/auto
 ```
 
-O Office entrega o contexto ao agente de destino e registra a transferência para Orion.
+O catálogo de modelos é carregado dinamicamente pelo endpoint `/api/models`.
 
-## Limite atual
-Os agentes já conversam por IA de verdade, mas ainda não possuem todas as ferramentas externas do runtime conectadas dentro do Office. A próxima camada é ligar chat → Job/Task → connectors → receipts/evidência.
+### Vercel AI Gateway
+Na Vercel:
+```
+AI_GATEWAY_API_KEY=...
+```
+
+No Office:
+```
+⚙ Inteligência
+Gateway: Vercel AI Gateway
+Modelo: openai/gpt-5.4
+```
+
+Você também pode digitar uma chave temporária na interface. Ela fica apenas na memória da aba e não é persistida no localStorage.
+
+## Handoff-first
+Quando um agente identifica outro especialista:
+1. devolve um handoff estruturado;
+2. o Office transfere o contexto ao agente de destino;
+3. Orion recebe o registro;
+4. o mapa mostra visualmente a transferência;
+5. o histórico continua no agente correto.
+
+## Estrutura do game
+```
+office/
+├── index.html
+├── game.css
+├── game/
+│   ├── main.js
+│   ├── config.js
+│   ├── state.js
+│   ├── render.js
+│   ├── scene.js
+│   └── ui.js
+└── api/
+    ├── chat.js
+    └── models.js
+```
+
+## Próximas camadas
+- sprites/roupas e animações mais ricas;
+- NPCs andando entre estações;
+- elevador/andares;
+- jobs reais refletidos no mapa;
+- connectors executáveis com receipts;
+- persistência server-side das conversas/jobs.
