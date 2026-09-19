@@ -1,0 +1,13 @@
+version: 0.1
+client_context:
+  required: [client_id,brand,business,objectives,policies]
+  fields:
+    brand: [name,voice,visual_identity,claims,forbidden_claims]
+    business: [products,services,locations,markets,pricing]
+    audience: [icp,personas,jtbd,objections]
+    objectives: [primary_goal,kpis,time_horizon]
+    channels: [social,ads,search,local,email,web,crm]
+    assets: [logos,images,videos,documents,sites]
+    policies: [approval,budget,legal,brand,risk]
+    connections: [provider_refs]
+    history: [campaign_refs,job_refs,learning_refs]
