@@ -1,0 +1,22 @@
+id: wordpress-extended
+family: cms-application
+status: scaffold
+auth: [oauth2,application_password,service_account_proxy]
+capabilities:
+  - read_site_health
+  - read_plugins
+  - read_themes
+  - read_users_and_roles
+  - create_update_pages
+  - media_operations
+  - custom_rest_calls
+  - wp_cli
+  - plugin_deploy
+  - plugin_activate_deactivate
+  - cache_flush
+  - maintenance_mode
+  - healthcheck
+policies:
+  production_plugin_change: approval_by_default
+  core_update: maintenance_policy
+  destructive_database_change: approval_required
