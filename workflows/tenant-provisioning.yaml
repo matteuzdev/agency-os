@@ -1,0 +1,21 @@
+id: tenant-provisioning
+owner: Tenant
+supervisor: Bruno
+collaborators: [Nix,Dock,Sentinel,Vault,Pulse]
+steps:
+  - create_tenant_id
+  - allocate_resource_budget
+  - create_isolated_network
+  - create_secrets_namespace
+  - provision_database_scope
+  - provision_volumes
+  - configure_stack
+  - configure_reverse_proxy_and_tls
+  - configure_backup_scope
+  - configure_monitoring_labels
+  - security_validation
+  - cross_tenant_isolation_test
+  - deploy
+  - healthcheck
+  - create_execution_receipt
+rollback: remove_only_new_tenant_resources_after_verified_backup_policy
