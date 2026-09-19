@@ -1,0 +1,18 @@
+id: infrastructure-quote
+owner: Cesar
+supervisor: Bruno
+collaborators: [Tenant,Pulse,Vault]
+steps:
+  - collect_workload_requirements
+  - estimate_users_and_concurrency
+  - estimate_cpu_memory_storage_bandwidth
+  - define_backup_and_availability_requirements
+  - choose_tenancy_model
+  - research_current_provider_prices
+  - compare_provider_scenarios
+  - calculate_fixed_and_variable_costs
+  - calculate_cost_per_tenant
+  - model_growth_scenarios
+  - recommend_capacity_thresholds
+  - produce_quote
+outputs: [requirements,provider_matrix,cost_breakdown,cost_per_client,growth_scenarios,quote]
