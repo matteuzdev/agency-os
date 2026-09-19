@@ -1,4 +1,4 @@
-export const TILE_W=64,TILE_H=32,GRID_W=24,GRID_H=18,ORIGIN_X=760,ORIGIN_Y=110;
+export const TILE_W=64,TILE_H=32,GRID_W=30,GRID_H=20,ORIGIN_X=900,ORIGIN_Y=110;
 
 export const ZONES=[
 {id:"strategy",name:"ESTRATÉGIA",x:1,y:1,w:7,h:5,color:0x243956},
@@ -9,7 +9,9 @@ export const ZONES=[
 {id:"sales",name:"VENDAS & CRM",x:16,y:7,w:7,h:5,color:0x4a3a25},
 {id:"ai",name:"IA & AUTOMAÇÃO",x:1,y:13,w:7,h:4,color:0x2f3559},
 {id:"qa",name:"QA & GOVERNANÇA",x:9,y:13,w:6,h:4,color:0x4a2f46},
-{id:"infra",name:"VPS & INFRA",x:16,y:13,w:7,h:4,color:0x33412d}
+{id:"infra",name:"VPS & INFRA",x:16,y:13,w:7,h:4,color:0x33412d},
+{id:"owner",name:"SALA DO HIANTO",x:24,y:1,w:5,h:5,color:0x3b435f},
+{id:"meeting",name:"SALA DE REUNIÃO",x:24,y:7,w:5,h:7,color:0x3d493d}
 ];
 
 const raw=[
