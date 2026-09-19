@@ -1,0 +1,7 @@
+id: wordpress
+family: cms
+status: scaffold
+auth: oauth2
+capabilities: [read_pages,create_draft,update_page,publish]
+required_runtime_config: [site_connection]
+policies: {publish: approval_by_default}
