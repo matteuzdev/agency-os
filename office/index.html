@@ -66,7 +66,12 @@
         <div class="field">
           <label id="keyLabel" for="apiKey">API Key temporária (opcional)</label>
           <input id="apiKey" type="password" autocomplete="off" placeholder="deixe vazio para usar a variável da Vercel">
-          <span class="field-note">A chave digitada aqui fica apenas na memória desta aba. Não é salva no localStorage.</span>
+          <span class="field-note">Por padrão a chave fica apenas nesta aba.</span>
+          <label class="field-note" style="display:flex;gap:8px;align-items:center;margin-top:6px">
+            <input id="rememberKey" type="checkbox" style="width:auto">
+            Lembrar neste dispositivo
+          </label>
+          <span class="field-note">Use essa opção só no seu computador pessoal: a chave ficará armazenada no navegador e poderá ser lida por scripts executados neste domínio.</span>
         </div>
 
         <div class="actions">
