@@ -1,0 +1,6 @@
+id: paid-media-cycle
+owner: Max
+supervisor: Atlas
+steps: [load_business_context,load_offer,inspect_tracking,audit_account,research_market,define_hypotheses,build_campaign_plan,prepare_creatives,qa,approval_gate,create_or_update_campaign,monitor,analyze,iterate,update_memory]
+connectors: [ads,analytics,storage]
+policies: {spend: approval_required, budget_increase: approval_required, pause: policy_driven}
