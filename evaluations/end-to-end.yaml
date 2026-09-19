@@ -1,0 +1,14 @@
+version: 0.1
+scenarios:
+  - id: new-local-business
+    flow: [onboarding,strategy,local-seo,website,social,analytics]
+    assertions: [client_context_created,approvals_respected,receipts_created,metrics_baselined]
+  - id: lead-engine
+    flow: [landing_page,crm,automation,messaging,analytics]
+    assertions: [tenant_isolated,secrets_referenced,no_duplicate_lead_actions,failures_observable]
+  - id: wordpress-backoffice
+    flow: [research,architecture,staging,plugin_build,qa,backup,deploy,healthcheck]
+    assertions: [no_core_edits,least_privilege,rollback_available]
+  - id: agency-managed-vps
+    flow: [quote,provision,deploy,monitor,backup,restore_test]
+    assertions: [tenant_isolated,cost_attributed,backup_restorable]
