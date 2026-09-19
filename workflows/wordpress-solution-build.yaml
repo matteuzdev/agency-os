@@ -1,0 +1,27 @@
+id: wordpress-solution-build
+owner: Wally
+supervisor: Noah
+implementer: Piper
+collaborators: [Leo,Chloe,Ben,Ada,Linus,Bruno]
+steps:
+  - business_problem_discovery
+  - research_before_build
+  - decide_site_plugin_or_backoffice_architecture
+  - define_data_model
+  - define_roles_and_capabilities
+  - define_integrations
+  - define_domain_and_access_model
+  - threat_model
+  - create_staging
+  - implement
+  - automated_and_manual_tests
+  - security_review
+  - performance_review
+  - conversion_or_ux_review
+  - client_preview
+  - approval
+  - backup
+  - deploy
+  - post_deploy_healthcheck
+  - monitoring
+connectors: [wordpress,deployment,analytics,storage,automation]
