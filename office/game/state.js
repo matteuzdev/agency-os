@@ -3,7 +3,8 @@ import {AGENTS} from "./config.js";
 export const $=s=>document.querySelector(s);
 export let provider=localStorage.getItem("agency-provider")||"openrouter";
 export let model=localStorage.getItem("agency-model")||(provider==="openrouter"?"openrouter/auto":"openai/gpt-5.4");
-export let tempKey="";
+export let rememberKey=localStorage.getItem("agency-remember-key")==="1";
+export let tempKey=(rememberKey?localStorage.getItem("agency-ai-key"):"")||sessionStorage.getItem("agency-ai-key")||"";
 export let selectedAgent=AGENTS.find(a=>a.name==="Orion");
 export let aiBusy=false;
 
@@ -11,7 +12,12 @@ export const store=JSON.parse(localStorage.getItem("agency-game-state")||'{"mess
 
 export function setProvider(v){provider=v;}
 export function setModel(v){model=v;}
-export function setTempKey(v){tempKey=v;}
+export function setTempKey(v,remember=rememberKey){
+  tempKey=v;rememberKey=remember;
+  if(v)sessionStorage.setItem("agency-ai-key",v); else sessionStorage.removeItem("agency-ai-key");
+  localStorage.setItem("agency-remember-key",remember?"1":"0");
+  if(remember&&v)localStorage.setItem("agency-ai-key",v); else localStorage.removeItem("agency-ai-key");
+}
 export function setSelectedAgent(v){selectedAgent=v;}
 export function setAiBusy(v){aiBusy=v;}
 export function saveStore(){localStorage.setItem("agency-game-state",JSON.stringify(store));}
@@ -43,6 +49,13 @@ export function renderMessages(){
   $("#messages").innerHTML=list.map(m=>'<div class="msg '+(m.type||"agent")+'">'+esc(m.text)+'</div>').join("")+
     (aiBusy?'<div class="msg agent"><span class="typing"><i></i><i></i><i></i> '+esc(selectedAgent.name)+' está pensando</span></div>':"");
   $("#panel").scrollTop=$("#panel").scrollHeight;
+}
+
+export function clearStoredKey(){
+  tempKey="";rememberKey=false;
+  sessionStorage.removeItem("agency-ai-key");
+  localStorage.removeItem("agency-ai-key");
+  localStorage.setItem("agency-remember-key","0");
 }
 
 export function persistAi(){
