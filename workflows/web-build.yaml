@@ -1,0 +1,5 @@
+id: web-build
+owner: Noah
+specialists: [Ian,Lia,Chloe,Ben,Leo]
+steps: [brief,research,information_architecture,conversion_strategy,copy,design_system,build,responsive_qa,seo_qa,conversion_qa,preview,approval,deploy,post_deploy_checks,measure]
+connectors: [cms,deployment,analytics,storage]
