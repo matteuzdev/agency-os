@@ -1,0 +1,22 @@
+version: 0.1
+principles:
+  - wordpress_is_application_platform_not_only_cms
+  - business_logic_in_custom_plugins
+  - presentation_in_theme_or_blocks
+  - never_modify_wordpress_core
+  - isolate_client_specific_logic
+  - expose_only_required_rest_endpoints
+  - enforce_roles_capabilities_and_nonces
+  - staging_before_production
+solution_types:
+  marketing_site: [pages,blog,forms,seo,analytics]
+  client_portal: [authentication,roles,dashboard,documents,workflows]
+  business_tool: [custom_ui,data_model,automation,integrations]
+  backoffice: [admin_or_frontend_dashboard,operations,reports,permissions]
+  integration_hub: [rest_api,webhooks,crm,erp,messaging,automation]
+data_strategy:
+  content_like_data: [custom_post_types,taxonomies,metadata]
+  high_volume_transactional_data: [custom_tables]
+access:
+  options: [wp_admin,custom_frontend_dashboard,headless_or_embedded_interface]
+  domain: [primary_domain,subdomain,path]
