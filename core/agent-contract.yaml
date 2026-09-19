@@ -1,0 +1,20 @@
+agent_contract:
+  required:
+    - id
+    - name
+    - role
+    - mission
+    - persona
+    - skills
+    - workflows
+    - connectors
+    - memory
+    - permissions
+    - metrics
+    - definition_of_done
+  permission_levels: [read,draft,write,publish,spend,delete]
+  defaults:
+    publish: approval_required
+    spend: approval_required
+    delete: approval_required
+    credentials: secret_manager_only
