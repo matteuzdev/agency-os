@@ -1,0 +1,5 @@
+version: 0.1
+receipt:
+  required: [job_id,task_id,agent,action,status,timestamp]
+  optional: [provider,resource_id,before_ref,after_ref,evidence_ref,metrics,error,rollback_ref]
+statuses: [success,partial,failed,blocked,approval_required]
