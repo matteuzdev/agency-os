@@ -1,0 +1,6 @@
+id: generic-webhook
+family: automation
+status: scaffold
+auth: api_key
+capabilities: [run_workflow,read_run_status]
+security: [allowlist_hosts,secret_manager,request_signing_when_supported,redact_logs]
