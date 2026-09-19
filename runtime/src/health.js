@@ -1,0 +1,1 @@
+export async function healthcheck(registry){const results={};for(const [family,c] of registry.items){try{results[family]=c.healthcheck?await c.healthcheck():{status:"configured"}}catch(e){results[family]={status:"down",error:String(e)}}}return results}
