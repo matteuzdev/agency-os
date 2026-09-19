@@ -1,0 +1,26 @@
+version: 0.1
+skills:
+  research-before-build: {owners: [Maya,Ada,Noah], stage: active}
+  market-research: {owners: [Iris], stage: specified}
+  persona-icp-research: {owners: [Sofia], stage: specified}
+  offer-design: {owners: [Victor], stage: specified}
+  social-strategy: {owners: [Nina,Cora], stage: specified}
+  copywriting: {owners: [Leo], stage: specified}
+  creative-direction: {owners: [Ravi,Mia], stage: specified}
+  image-generation: {owners: [Mia], stage: native_runtime}
+  paid-media: {owners: [Max], stage: specified}
+  seo: {owners: [Hugo], stage: specified}
+  local-seo: {owners: [Gaia], stage: specified}
+  geo-aeo: {owners: [Eva], stage: specified}
+  website-build: {owners: [Ian], stage: specified}
+  landing-page-build: {owners: [Lia], stage: specified}
+  cro: {owners: [Chloe], stage: specified}
+  lead-research: {owners: [Alex], stage: specified}
+  outreach: {owners: [Sam], stage: specified}
+  sales: {owners: [Marco], stage: specified}
+  crm: {owners: [Emma], stage: specified}
+  email-lifecycle: {owners: [Elise], stage: specified}
+  agent-engineering: {owners: [Turing], stage: specified}
+  automation-design: {owners: [Grace], stage: specified}
+  integration-engineering: {owners: [Linus], stage: specified}
+  context-engineering: {owners: [Nova], stage: specified}
