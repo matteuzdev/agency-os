@@ -1,0 +1,16 @@
+version: 0.1
+job:
+  required: [id,client_id,objective,status,owner,created_at]
+  fields:
+    objective: string
+    success_criteria: array
+    kpis: array
+    constraints: array
+    budget_policy: object
+    approval_policy: object
+    context_refs: array
+    tasks: array
+    evidence: array
+    metrics: object
+    learnings: array
+statuses: [QUEUED,PLANNED,DELEGATED,RUNNING,VERIFYING,APPROVAL,EXECUTING,MEASURING,DONE,FAILED,ESCALATED]
