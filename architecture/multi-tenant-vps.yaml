@@ -1,0 +1,34 @@
+version: 0.1
+model: shared-vps-isolated-tenants
+tenant_unit:
+  dedicated:
+    - application_stack
+    - docker_network
+    - persistent_volumes
+    - database_or_schema_policy
+    - secrets_namespace
+    - environment_config
+    - backup_scope
+    - logs_and_metrics_labels
+    - domains_and_routes
+  resource_controls: [cpu,memory,pids,storage]
+  naming: "tenant_<client_id>_*"
+network:
+  default: deny_cross_tenant
+  public_ingress: reverse_proxy_only
+  database_exposure: private_only
+data:
+  default: tenant_scoped_database
+  alternatives: [dedicated_database_instance,dedicated_schema]
+  forbidden: [unscoped_shared_tables,shared_credentials]
+secrets:
+  rule: per_tenant_credentials
+  storage: secret_manager_or_runtime_secret_store
+backups:
+  rule: independently_restorable_per_tenant
+observability:
+  dimensions: [tenant_id,service,environment]
+  prohibit_sensitive_payload_logging: true
+lifecycle: [provision,configure,deploy,healthcheck,operate,backup,restore,migrate,suspend,deprovision]
+escape_hatch:
+  rule: high_risk_or_high_value_tenant_can_move_to_dedicated_vps_without_app_redesign
