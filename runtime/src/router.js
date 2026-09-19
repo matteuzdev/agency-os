@@ -1,0 +1,3 @@
+const routes={strategy:"Maya",content:"Luna",social:"Nina",creative:"Mia",ads:"Max",seo:"Hugo",local_business:"Gaia",analytics:"Otto",website:"Ian",landing_page:"Lia",wordpress:"Wally",sales:"Marco",crm:"Emma",automation:"Grace",integration:"Linus",vps:"Bruno",infrastructure:"Bruno",pricing:"Cesar",tenant:"Tenant",qa:"Vera"};
+export function routeCapability(capability){const family=capability.split(".")[0];return routes[family]??"Orion"}
+export function buildPlan(objective,capabilities=[]){return capabilities.map((capability,i)=>({id:"task_"+(i+1),agent:routeCapability(capability),capability,depends_on:i?["task_"+i]:[]}))}
