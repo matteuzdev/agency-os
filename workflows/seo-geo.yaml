@@ -1,0 +1,5 @@
+id: seo-geo-cycle
+owners: [Hugo,Eva]
+supervisor: Atlas
+steps: [crawl_or_audit,research_queries,analyze_serp_and_ai_surfaces,map_intent,technical_backlog,content_backlog,entity_and_schema_plan,implement_or_delegate,qa,measure,update_memory]
+connectors: [search,analytics,cms]
