@@ -1,0 +1,14 @@
+version: 0.1
+memory:
+  scopes:
+    agency: {contains: [framework_rules,global_playbooks,tool_knowledge]}
+    client: {contains: [brand,offer,products,audience,policies,credentials_refs]}
+    campaign: {contains: [hypotheses,assets,decisions,results]}
+    agent: {contains: [role_specific_learnings,verified_patterns]}
+    job: {contains: [inputs,decisions,evidence,outputs]}
+  rules:
+    - store_verified_facts_with_provenance
+    - separate_fact_hypothesis_and_preference
+    - never_store_raw_secrets_in_prompt_memory
+    - expire_stale_operational_data
+    - preserve_client_isolation
