@@ -1,0 +1,74 @@
+version: 0.1
+id: browser-computer-use
+status: executor_not_bound
+purpose: >
+  Provider-agnostic contract for authorized browser automation and computer-use.
+  The Office may visualize requests immediately, but external actions become REAL
+  only after an executor returns a receipt with evidence.
+
+routing:
+  prefer:
+    - native_capability
+    - official_api
+    - authorized_connector
+    - browser_use
+    - computer_use
+
+browser_use:
+  operations:
+    - open
+    - navigate
+    - snapshot
+    - click
+    - fill
+    - type
+    - select
+    - press
+    - scroll
+    - wait
+    - extract
+    - screenshot
+    - upload
+    - download
+  expected_executor_examples:
+    - agent-browser
+    - playwright-compatible-service
+    - authorized-cloud-browser
+
+computer_use:
+  operations:
+    - observe_screen
+    - click
+    - type
+    - press
+    - scroll
+    - drag
+    - select_file
+    - screenshot
+  expected_executor_examples:
+    - authorized-computer-use-runtime
+    - remote-desktop-worker
+
+policy:
+  read: auto
+  draft: auto
+  write: approval
+  publish: approval
+  spend: approval
+  delete: approval
+  credential_entry: approval
+  destructive_or_irreversible: approval
+
+receipt:
+  required: true
+  fields:
+    - job_id
+    - task_id
+    - agent
+    - capability
+    - executor
+    - target
+    - started_at
+    - finished_at
+    - status
+    - evidence
