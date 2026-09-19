@@ -52,13 +52,13 @@
         </div>
 
         <div class="field">
-          <label for="apiKey">OpenAI API Key temporária</label>
-          <input id="apiKey" type="password" autocomplete="off" placeholder="sk-...">
+          <label for="apiKey">Vercel AI Gateway Key temporária</label>
+          <input id="apiKey" type="password" autocomplete="off" placeholder="Cole sua AI Gateway key...">
         </div>
 
         <p class="help">
-          Recomendado na Vercel: configure <b>OPENAI_API_KEY</b> em Project Settings → Environment Variables.
-          A chave digitada aqui fica apenas na memória desta aba e é enviada somente ao endpoint <code>/api/chat</code>.
+          Opcional na Vercel: configure <b>AI_GATEWAY_API_KEY</b> em Project Settings → Environment Variables. Se você prefere informar a chave aqui no Office, não precisa criar essa variável.
+          A chave digitada aqui fica apenas na memória desta aba, é enviada ao seu endpoint <code>/api/chat</code> e usada no Vercel AI Gateway.
           Ela não é gravada no localStorage.
         </p>
 
