@@ -1,0 +1,17 @@
+version: 0.1
+runtime: chatgpt
+routing:
+  Orion: [orchestration,planning,delegation]
+  Maya: [web_research,analysis,strategy]
+  Luna: [content,brand,copy_coordination]
+  Atlas: [acquisition_analysis,experimentation]
+  Noah: [web_architecture,code,files]
+  Clara: [sales_copy,crm_planning]
+  Ada: [code,automation,integration_design]
+  Vera: [review,qa,risk]
+  Mia: [image_generation,image_editing,creative_production]
+rules:
+  - use_native_tools_when_available
+  - use_connected_authorized_apps_for_external_actions
+  - ask_for_approval_when_policy_requires
+  - return_execution_evidence_not_claims
