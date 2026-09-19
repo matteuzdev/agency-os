@@ -1,0 +1,14 @@
+version: 0.1
+provider:
+  required: [id,family,auth,capabilities]
+  fields:
+    id: string
+    family: string
+    auth: [oauth2,api_key,service_account,session]
+    capabilities: array
+    scopes: array
+    rate_limits: object
+    supports_webhooks: boolean
+    healthcheck: object
+    evidence_strategy: object
+    risk_overrides: object
