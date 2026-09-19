@@ -1,0 +1,1 @@
+export class ClientStore{constructor(){this.clients=new Map()}put(ctx){if(!ctx?.client_id)throw new Error("client_id required");this.clients.set(ctx.client_id,structuredClone(ctx));return ctx}get(id){return this.clients.get(id)}remove(id){return this.clients.delete(id)}}
