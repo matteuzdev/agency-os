@@ -9,7 +9,9 @@ export class OfficeScene extends Phaser.Scene{
     this.blocked=new Set(AGENTS.map(a=>keyOf(a.gx,a.gy)));
     this.agentObjects=new Map();
     this.walking=false;
-    this.playerGrid={gx:26,gy:4};\n    this.agentHomes=new Map();\n    this.meetingParticipants=new Set();
+    this.playerGrid={gx:26,gy:4};
+    this.agentHomes=new Map();
+    this.meetingParticipants=new Set();
     this.selectedMarker=this.add.graphics().setDepth(5);
 
     drawWorld(this);
@@ -39,7 +41,8 @@ export class OfficeScene extends Phaser.Scene{
         if(pointer.event?.stopPropagation)pointer.event.stopPropagation();
         this.walkToAgent(agent);
       });
-      this.agentObjects.set(agent.name,obj);\n      this.agentHomes.set(agent.name,{x:obj.x,y:obj.y,gx:agent.gx,gy:agent.gy});
+      this.agentObjects.set(agent.name,obj);
+      this.agentHomes.set(agent.name,{x:obj.x,y:obj.y,gx:agent.gx,gy:agent.gy});
       if(agent.status==="working"){
         this.tweens.add({targets:obj,y:obj.y-2,duration:850+Math.random()*450,yoyo:true,repeat:-1,ease:"Sine.easeInOut"});
       }
@@ -261,7 +264,8 @@ export class OfficeScene extends Phaser.Scene{
   }
 
   endMeeting(){
-    this.returnAgents([...this.meetingParticipants]);\n    this.meetingParticipants.clear();
+    this.returnAgents([...this.meetingParticipants]);
+    this.meetingParticipants.clear();
     this.focusRoom("owner");
   }
 
