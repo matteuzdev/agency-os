@@ -1,0 +1,7 @@
+id: google-business
+family: local-business
+status: scaffold
+auth: oauth2
+capabilities: [read_profile,read_reviews,read_insights,create_post,update_profile,reply_review]
+required_runtime_config: [oauth_connection,location_selection]
+policies: {update_profile: approval_by_default,reply_review: policy}
