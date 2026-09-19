@@ -3,3 +3,22 @@
 .bottom-bar{position:absolute;z-index:22;left:50%;bottom:14px;transform:translateX(-50%);display:flex;gap:8px;align-items:center;background:#0d1420e8;border:1px solid #31445f;border-radius:12px;padding:7px 9px;box-shadow:0 10px 35px #0008;backdrop-filter:blur(8px)}
 .bottom-bar span{font-size:10px;color:#8598b4;padding:0 6px}
 @media(max-width:1020px){.app{height:100vh}.game-shell{height:100vh;min-height:0}.side{position:absolute;left:10px;right:10px;top:70px;bottom:10px;width:auto;min-height:0;border:1px solid #31445f}.side:not(.open){transform:translateY(calc(100% + 40px))}.side.open{transform:translateY(0)}.bottom-bar{left:12px;right:12px;transform:none;justify-content:center}.bottom-bar span{display:none}}
+
+.live-activity{position:absolute;z-index:24;left:16px;top:62px;display:flex;align-items:center;gap:7px;max-width:min(520px,calc(100% - 32px));background:#0d1420e8;border:1px solid #2e415d;border-radius:999px;padding:7px 10px;font-size:11px;backdrop-filter:blur(8px);box-shadow:0 8px 24px #0006}
+.live-dot{width:8px;height:8px;border-radius:50%;background:#5ce08b;box-shadow:0 0 12px #5ce08b}
+.live-activity b{color:#9bc8ff}.live-activity span{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.activity-proof{margin-left:auto;font-size:9px;font-weight:800;padding:3px 6px;border-radius:999px}
+.activity-proof.internal{background:#28354a;color:#aebdd2}
+.activity-proof.real{background:#123b25;color:#78e69d;border:1px solid #2b7046}
+.activity-proof.approval{background:#453919;color:#f0ca71;border:1px solid #6b5723}
+.command-dock{position:absolute;z-index:26;left:50%;bottom:14px;transform:translateX(-50%);display:flex;align-items:center;gap:6px;width:min(1040px,calc(100% - 26px));padding:7px;background:#0c1421e8;border:1px solid #30445f;border-radius:13px;box-shadow:0 12px 36px #0009;backdrop-filter:blur(10px)}
+.command-dock input{flex:1;min-width:160px;background:#101a2a;color:#edf4ff;border:1px solid #314762;border-radius:8px;padding:9px 10px;outline:none}
+.command-dock input:focus{border-color:#6f9dd4}
+.meeting-participants{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.meeting-participants span{font-size:10px;padding:5px 7px;border-radius:999px;background:#1a2a40;border:1px solid #34506f;color:#cfe3ff}
+.recording{background:#5f2024!important;border-color:#a44249!important;color:#fff!important;box-shadow:0 0 0 2px #7f2b31aa}
+@media(max-width:1020px){
+  .command-dock{left:10px;right:10px;transform:none;width:auto;overflow-x:auto;justify-content:flex-start}
+  .command-dock input{min-width:230px}
+  .live-activity{top:108px}
+}
