@@ -1,0 +1,21 @@
+client_id: demo-rafaelly-001
+mode: simulation
+name: Rafaelly Lourenço
+business_type: Psicologia / profissional liberal
+objective: "Transformar presença digital em um sistema previsível de aquisição e atendimento"
+approval_policy:
+  read: auto
+  draft: auto
+  write: approval
+  publish: approval
+  spend: approval
+  delete: approval
+channels:
+  website: planned
+  local_seo: audit
+  social: audit
+  crm: planned
+constraints:
+  - "Nenhuma publicação, gasto ou contato real durante a simulação"
+  - "Não usar dados sensíveis de pacientes"
+status: ONBOARDING
