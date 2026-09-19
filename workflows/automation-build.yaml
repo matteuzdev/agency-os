@@ -1,0 +1,5 @@
+id: automation-build
+owner: Ada
+specialists: [Grace,Turing,Linus,Nova,SRE]
+steps: [discover_process,map_inputs_outputs,research_integrations,design_workflow,define_context_and_memory,define_permissions,implement,test_happy_path,test_failures,add_observability,approval,deploy,monitor]
+connectors: [automation,crm,messaging,email,storage,browser-computer-use]
