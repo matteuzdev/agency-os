@@ -213,6 +213,32 @@ export class OfficeScene extends Phaser.Scene{
     if(id==="office")this.time.delayedCall(650,()=>this.cameras.main.startFollow(this.player,true,.08,.08));
   }
 
+  summonToOwner(names=[]){
+    const spots=[{gx:25,gy:3},{gx:27,gy:3},{gx:25,gy:5},{gx:27,gy:5}];
+    names.slice(0,spots.length).forEach((name,index)=>{
+      const agent=AGENTS.find(a=>a.name.toLowerCase()===String(name).toLowerCase());
+      const obj=agent&&this.agentObjects.get(agent.name);
+      if(!agent||!obj)return;
+      const spot=spots[index],p=tileCenter(spot.gx,spot.gy);
+      this.tweens.killTweensOf(obj);
+      this.tweens.add({targets:obj,x:p.x,y:p.y-5,duration:600+index*80,ease:"Sine.easeInOut",
+        onUpdate:()=>obj.setDepth((spot.gx+spot.gy)*100+80),
+        onComplete:()=>this.showSpeech(agent,"Hianto, cheguei à sua sala.")});
+    });
+    this.focusRoom("owner");
+    window.dispatchEvent(new CustomEvent("agency:log",{detail:{agent:"SYSTEM",action:"OWNER_ROOM_SUMMON",detail:names.join(", ")}}));
+  }
+
+  returnAgents(names=[]){
+    for(const name of names){
+      const obj=this.agentObjects.get(name),home=this.agentHomes.get(name);
+      if(!obj||!home)continue;
+      this.tweens.killTweensOf(obj);
+      this.tweens.add({targets:obj,x:home.x,y:home.y,duration:650,ease:"Sine.easeInOut",
+        onUpdate:()=>obj.setDepth((home.gx+home.gy)*100+80)});
+    }
+  }
+
   summonToMeeting(names=[]){
     const seats=[
       {gx:25,gy:9},{gx:27,gy:9},{gx:25,gy:11},{gx:27,gy:11},
@@ -235,13 +261,7 @@ export class OfficeScene extends Phaser.Scene{
   }
 
   endMeeting(){
-    for(const name of this.meetingParticipants){
-      const obj=this.agentObjects.get(name),home=this.agentHomes.get(name);
-      if(!obj||!home)continue;
-      this.tweens.add({targets:obj,x:home.x,y:home.y,duration:700,ease:"Sine.easeInOut",
-        onUpdate:()=>obj.setDepth((home.gx+home.gy)*100+80)});
-    }
-    this.meetingParticipants.clear();
+    this.returnAgents([...this.meetingParticipants]);\n    this.meetingParticipants.clear();
     this.focusRoom("owner");
   }
 
