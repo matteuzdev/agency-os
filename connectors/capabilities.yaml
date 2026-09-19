@@ -1,0 +1,15 @@
+version: 0.1
+capabilities:
+  social: [list_accounts,read_profile,read_posts,read_comments,read_metrics,create_draft,schedule,publish,reply]
+  ads: [list_accounts,read_campaigns,read_metrics,create_draft_campaign,update_campaign,pause_campaign]
+  local_business: [read_profile,read_reviews,read_insights,create_post,update_profile,reply_review]
+  search: [keyword_research,serp_analysis,site_audit,read_search_performance]
+  analytics: [read_events,read_conversions,read_funnels,read_attribution]
+  crm: [read_contacts,upsert_contact,read_pipeline,update_stage,create_activity]
+  messaging: [read_conversations,send_message,use_template]
+  email: [read_campaigns,create_campaign,create_sequence,send,read_metrics]
+  cms: [read_pages,create_draft,update_page,publish]
+  deployment: [build,preview,deploy,rollback]
+  storage: [read_asset,write_asset,list_assets]
+  automation: [create_workflow,run_workflow,read_run_status,retry_run]
+  browser_computer_use: [open,navigate,click,type,upload,download,read_screen]
