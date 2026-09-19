@@ -1,0 +1,36 @@
+version: 0.1
+defaults:
+  browser_use:
+    allowed: true
+    approval_for: [WRITE,PUBLISH,SPEND,DELETE,credential_entry]
+  computer_use:
+    allowed: true
+    approval_default: true
+    approval_for: [WRITE,PUBLISH,SPEND,DELETE,credential_entry,destructive_action]
+  evidence_required: true
+
+department_profiles:
+  strategy:
+    browser_use: [navigate,snapshot,extract,screenshot]
+    computer_use: [observe_screen]
+  content:
+    browser_use: [navigate,snapshot,extract,screenshot,download]
+    computer_use: [observe_screen]
+  growth:
+    browser_use: [navigate,snapshot,click,fill,extract,screenshot,download]
+    computer_use: [observe_screen,click,type,press,scroll]
+  web:
+    browser_use: [navigate,snapshot,click,fill,type,press,screenshot,upload,download]
+    computer_use: [observe_screen,click,type,press,scroll,drag,select_file]
+  sales:
+    browser_use: [navigate,snapshot,click,fill,type,extract,screenshot]
+    computer_use: [observe_screen,click,type,press,scroll]
+  ai:
+    browser_use: [navigate,snapshot,click,fill,type,press,extract,screenshot,upload,download]
+    computer_use: [observe_screen,click,type,press,scroll,drag,select_file]
+  qa:
+    browser_use: [navigate,snapshot,extract,screenshot]
+    computer_use: [observe_screen]
+  infra:
+    browser_use: [navigate,snapshot,click,fill,type,extract,screenshot,download]
+    computer_use: [observe_screen,click,type,press,scroll,drag]
