@@ -9,3 +9,29 @@ routing_policy:
     - fallback_to_ui_only_when_api_or_connector_is_unavailable_or_insufficient
 execution_receipt:
   required: [job_id,agent,capability,provider,status,timestamp,evidence]
+
+browser_and_computer_use:
+  browser_first: true
+  browser_use:
+    appropriate_for: [navigate_web,forms,clicks,text_entry,downloads,screenshots,structured_extraction]
+    receipt_required: true
+  computer_use:
+    appropriate_for: [authorized_gui_without_api,desktop_app,visual_only_interface]
+    receipt_required: true
+    approval_default: true
+  forbidden_claims:
+    - never_claim_click_navigation_upload_download_or_change_without_executor_receipt
+    - never_expose_hidden_reasoning_as_activity
+activity_visibility:
+  show:
+    - operational_status
+    - tool_selected
+    - target_system
+    - action_summary
+    - approval_state
+    - progress
+    - receipt_and_evidence
+  hide:
+    - private_chain_of_thought
+    - credentials
+    - secret_values
