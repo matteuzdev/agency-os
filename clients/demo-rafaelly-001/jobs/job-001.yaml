@@ -1,0 +1,41 @@
+job:
+  id: job-demo-rafaelly-001
+  client_id: demo-rafaelly-001
+  objective: "Criar o primeiro plano integrado de crescimento digital"
+  status: DELEGATED
+  orchestrator: Orion
+  tasks:
+    - id: t1
+      owner: Maya
+      capability: strategy.research
+      status: RUNNING
+    - id: t2
+      owner: Gaia
+      capability: local_business.audit
+      status: QUEUED
+      depends_on: [t1]
+    - id: t3
+      owner: Noah
+      capability: website.plan
+      status: QUEUED
+      depends_on: [t1]
+    - id: t4
+      owner: Luna
+      capability: content.strategy
+      status: QUEUED
+      depends_on: [t1]
+    - id: t5
+      owner: Clara
+      capability: crm.pipeline_design
+      status: QUEUED
+      depends_on: [t1]
+    - id: t6
+      owner: Ada
+      capability: automation.design
+      status: QUEUED
+      depends_on: [t5]
+    - id: t7
+      owner: Vera
+      capability: qa.review
+      status: QUEUED
+      depends_on: [t2,t3,t4,t5,t6]
