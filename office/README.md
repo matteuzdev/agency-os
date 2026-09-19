@@ -7,12 +7,12 @@ Escritório 2D jogável do Agency OS.
 - departamentos físicos e mesas;
 - agentes/NPCs no escritório;
 - aproximação + tecla E para conversar;
-- chat real via OpenAI API;
+- chat real via Vercel AI Gateway, permitindo múltiplos provedores/modelos;
 - logs de operação;
 - handoff automático entre agentes;
 - Orion recebe registro dos handoffs;
 - configuração de modelo e chave de API;
-- histórico local de conversas, sem salvar a API key no localStorage.
+- histórico local de conversas, sem salvar a AI Gateway key no localStorage.
 
 ## Rodar localmente
 Sirva a pasta `office` com um servidor HTTP. O HTML sozinho funciona para o mapa, mas o chat de IA precisa do endpoint `/api/chat`.
@@ -32,7 +32,7 @@ O modelo também pode ser escolhido na interface.
 ## Chave temporária pela interface
 O botão `⚙ IA` abre a configuração. A chave digitada ali fica apenas na memória da aba e é enviada ao endpoint da própria aplicação. Ao recarregar a página, ela some.
 
-Para produção, prefira `OPENAI_API_KEY` na Vercel.
+Se você usar a chave digitada no próprio Office, `AI_GATEWAY_API_KEY` pode simplesmente não existir. Não use `0`: seria tratado como uma credencial e falharia. Para uma implantação privada/produção, prefira o secret da Vercel.
 
 ## Handoff
 Quando um agente decide que outro especialista é mais adequado, a resposta pode gerar:
