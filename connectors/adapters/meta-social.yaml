@@ -1,0 +1,8 @@
+id: meta-social
+family: social
+status: scaffold
+auth: oauth2
+capabilities: [list_accounts,read_profile,read_posts,read_comments,read_metrics,create_draft,schedule,publish,reply]
+required_runtime_config: [oauth_connection,account_selection]
+policies: {publish: approval_by_default}
+notes: "Implementação concreta deve usar APIs oficiais disponíveis e escopos autorizados; sem credenciais hardcoded."
