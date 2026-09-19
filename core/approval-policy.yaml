@@ -1,0 +1,16 @@
+version: 0.1
+defaults:
+  read: auto
+  draft: auto
+  write: policy
+  publish: approve
+  spend: approve
+  delete: approve
+risk_examples:
+  social_publish: publish
+  ad_budget_change: spend
+  crm_note: write
+  website_preview: draft
+  production_deploy: publish
+  destructive_delete: delete
+approval_receipt: [job_id,action,actor,decision,timestamp,scope]
