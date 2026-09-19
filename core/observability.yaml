@@ -1,0 +1,17 @@
+version: 0.1
+telemetry:
+  job: [status,duration,cost,errors,approvals]
+  agent: [tasks,success_rate,latency,tool_calls,rework]
+  connector: [availability,latency,error_rate,rate_limit]
+  tenant: [cpu,memory,storage,requests,errors,backup_status]
+tracing:
+  correlation_keys: [job_id,task_id,client_id,tenant_id,agent]
+logging:
+  structured: true
+  redact: [password,token,api_key,cookie,authorization,personal_sensitive_payload]
+alerts:
+  - connector_down
+  - repeated_job_failure
+  - backup_failed
+  - tenant_resource_pressure
+  - unauthorized_action_attempt
