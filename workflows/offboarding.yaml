@@ -1,0 +1,14 @@
+id: client-offboarding
+owner: Orion
+collaborators: [Bruno,Tenant,Vault,Vera]
+steps:
+  - freeze_new_actions
+  - inventory_client_assets_and_connections
+  - export_client_owned_data
+  - confirm_retention_policy
+  - revoke_or_transfer_credentials
+  - archive_execution_receipts
+  - final_backup_if_policy
+  - deprovision_after_approval
+  - verify_cross_tenant_integrity
+  - close_client_context
