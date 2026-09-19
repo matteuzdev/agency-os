@@ -1,0 +1,18 @@
+id: client-lifecycle
+owner: Kai
+steps:
+  - intake
+  - build_client_context
+  - strategy_diagnosis
+  - define_objectives_and_kpis
+  - select_departments
+  - generate_work_plan
+  - delegate
+  - execute
+  - qa
+  - approval
+  - external_actions
+  - collect_metrics
+  - performance_review
+  - update_memory
+  - next_cycle
