@@ -1,0 +1,5 @@
+id: local-seo-cycle
+owner: Gaia
+supervisor: Atlas
+steps: [load_business_context,audit_profile,audit_nap,audit_categories,research_local_competitors,research_queries,optimize_profile,plan_posts,review_management,qa,approval_gate,publish_changes,collect_insights,update_memory]
+connectors: [local-business,search,analytics]
