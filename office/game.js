@@ -71,7 +71,7 @@ const keys=new Set();
 let nearest=null;
 let selected=agents.find(a=>a.name==="Orion");
 let aiKey="";
-let model=localStorage.getItem("agency-model")||"gpt-5.6-luna";
+let model=localStorage.getItem("agency-model")||"openai/gpt-5.6-sol";
 let aiBusy=false;
 const store=JSON.parse(localStorage.getItem("agency-game-state")||'{"messages":{},"logs":[]}');
 
@@ -193,7 +193,7 @@ async function sendMessage(){
  addLog(selected.name,"USER_MESSAGE",text.slice(0,120));
  aiBusy=true;$("#send").disabled=true;$("#send").textContent="Pensando...";
  try{
-  const headers={"Content-Type":"application/json"};if(aiKey)headers["x-agency-api-key"]=aiKey;
+  const headers={"Content-Type":"application/json"};if(aiKey)headers["x-agency-ai-key"]=aiKey;
   const resp=await fetch("/api/chat",{method:"POST",headers,body:JSON.stringify({
    agent:selected.name,role:selected.role,task:selected.task,clientId:$("#client").value,
    message:text,model,history:conv(selected).slice(-12)
@@ -213,7 +213,7 @@ async function sendMessage(){
   }
   save();renderMessages();
  }catch(err){
-  conv(selected).push({type:"system",text:`Erro de IA: ${err.message}. Abra ⚙ IA para configurar a chave ou confira a variável OPENAI_API_KEY na Vercel.`});
+  conv(selected).push({type:"system",text:`Erro de IA: ${err.message}. Abra ⚙ IA para configurar a chave ou confira a variável AI_GATEWAY_API_KEY na Vercel.`});
   addLog("SYSTEM","AI_ERROR",err.message);save();renderMessages();
  }finally{aiBusy=false;$("#send").disabled=false;$("#send").textContent="Enviar"}
 }
@@ -238,7 +238,7 @@ $("#saveSettings").addEventListener("click",()=>{
  $("#settings").classList.remove("open");
  $("#aiState").textContent=aiKey?"chave temporária ativa":"usando Vercel env";
  $("#aiState").className=aiKey?"online":"badge";
- addLog("SYSTEM","AI_SETTINGS",`Modelo: ${model}; credencial: ${aiKey?"temporária":"Vercel env"}`);
+ addLog("SYSTEM","AI_SETTINGS",`Modelo: ${model}; credencial: ${aiKey?"Gateway key temporária":"Vercel env"}`);
 });
 $("#clearKey").addEventListener("click",()=>{aiKey="";$("#apiKey").value="";$("#aiState").textContent="usando Vercel env";addLog("SYSTEM","API_KEY_CLEARED","Chave temporária removida da memória.")});
 $("#copyHandoff").addEventListener("click",async()=>{
