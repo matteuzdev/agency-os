@@ -1,0 +1,13 @@
+version: 0.1
+dimensions: [client_id,job_id,agent,provider,tenant_id]
+track:
+  - model_usage
+  - external_api_cost
+  - infrastructure_cost
+  - storage_cost
+  - bandwidth_cost
+  - paid_media_spend
+rules:
+  - separate_agency_operating_cost_from_client_media_spend
+  - attribute_shared_infrastructure_by_declared_allocation_method
+  - preserve_provider_currency_and_conversion_timestamp
