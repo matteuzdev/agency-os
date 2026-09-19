@@ -55,8 +55,7 @@ async function callOpenRouter({key,model,messages}) {
     },
     body:JSON.stringify({
       model,
-      messages,
-      response_format:{type:"json_object"}
+      messages
     })
   });
   const data=await response.json();
