@@ -1,5 +1,5 @@
 import {AGENTS} from "./config.js";
-import {$,provider,model,tempKey,selectedAgent,aiBusy,setProvider,setModel,setTempKey,setSelectedAgent,setAiBusy,conversation,store,saveStore,addLog,renderLogs,renderMessages,persistAi} from "./state.js";
+import {$,provider,model,tempKey,rememberKey,selectedAgent,aiBusy,setProvider,setModel,setTempKey,clearStoredKey,setSelectedAgent,setAiBusy,conversation,store,saveStore,addLog,renderLogs,renderMessages,persistAi} from "./state.js";
 
 export function showPane(name){
   document.querySelectorAll(".pane").forEach(p=>p.classList.remove("active"));
@@ -57,7 +57,7 @@ async function loadModels(nextProvider=provider){
 function updateSettingsUi(){
   $("#provider").value=provider;
   $("#model").value=model;
-  $("#apiKey").value=tempKey;
+  $("#apiKey").value=tempKey;\n  $("#rememberKey").checked=rememberKey;
   $("#keyLabel").textContent=provider==="openrouter"
     ?"OpenRouter API Key temporária (opcional)"
     :"Vercel AI Gateway Key temporária (opcional)";
@@ -134,13 +134,13 @@ function bindSettings(){
   $("#saveSettings").addEventListener("click",()=>{
     const nextProvider=$("#provider").value;
     const nextModel=$("#model").value.trim()||(nextProvider==="openrouter"?"openrouter/auto":"openai/gpt-5.4");
-    setProvider(nextProvider);setModel(nextModel);setTempKey($("#apiKey").value.trim());persistAi();
+    setProvider(nextProvider);setModel(nextModel);setTempKey($("#apiKey").value.trim(),$("#rememberKey").checked);persistAi();
     $("#settings").classList.remove("open");refreshAiLabels();
-    addLog("SYSTEM","AI_CONFIG",nextProvider+" · "+nextModel+" · "+($("#apiKey").value.trim()?"chave temporária":"env da Vercel"));
+    addLog("SYSTEM","AI_CONFIG",nextProvider+" · "+nextModel+" · "+($("#apiKey").value.trim()?($("#rememberKey").checked?"chave salva neste dispositivo":"chave desta aba"):"env da Vercel"));
   });
 
   $("#clearKey").addEventListener("click",()=>{
-    setTempKey("");$("#apiKey").value="";
+    clearStoredKey();$("#apiKey").value="";$("#rememberKey").checked=false;
     addLog("SYSTEM","TEMP_KEY_CLEARED","Chave temporária removida da memória.");
   });
 }
