@@ -1,0 +1,11 @@
+version: 0.1
+routing_policy:
+  order: [native_capability,official_api,authorized_connector,browser_automation,computer_use]
+  rules:
+    - prefer_structured_and_auditable_actions
+    - never_expose_credentials_to_agent_context
+    - require_evidence_of_external_action
+    - respect_provider_terms_and_client_policy
+    - fallback_to_ui_only_when_api_or_connector_is_unavailable_or_insufficient
+execution_receipt:
+  required: [job_id,agent,capability,provider,status,timestamp,evidence]
