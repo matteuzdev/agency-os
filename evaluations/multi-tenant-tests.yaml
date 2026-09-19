@@ -1,0 +1,14 @@
+version: 0.1
+tests:
+  - id: cross-tenant-network
+    expect: [tenant_a_cannot_reach_tenant_b_private_services]
+  - id: secrets-isolation
+    expect: [tenant_a_cannot_read_tenant_b_secrets]
+  - id: backup-restore
+    expect: [restore_single_tenant_without_overwriting_others]
+  - id: resource-noisy-neighbor
+    expect: [tenant_resource_limits_enforced]
+  - id: data-scope
+    expect: [queries_and_credentials_are_tenant_scoped]
+  - id: migration
+    expect: [tenant_can_move_to_dedicated_vps]
