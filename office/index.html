@@ -3,68 +3,75 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Agency OS — Office Game</title>
+<title>Agency OS — Living Office</title>
 <link rel="stylesheet" href="./game.css">
 </head>
 <body>
 <div class="app">
   <section class="game-shell">
+    <div id="gameStage" class="game-stage" aria-label="Escritório isométrico jogável do Agency OS"></div>
+
     <div class="hud">
-      <span class="pill"><strong>AGENCY OS</strong> · Office Game</span>
-      <span class="pill hide-mobile">Mover: <span class="kbd">WASD</span> / setas · Falar: <span class="kbd">E</span></span>
-      <span class="pill">Cliente:
-        <select id="client">
-          <option value="demo-rafaelly-001">Rafaelly Lourenço</option>
-        </select>
-      </span>
-      <span class="spacer"></span>
-      <span class="pill"><span id="aiState" class="badge">usando Vercel env</span></span>
-      <button id="settingsBtn" type="button">⚙ IA</button>
-      <button id="reset" type="button">Reset local</button>
+      <div class="brand"><em>AGENCY OS</em> · LIVING OFFICE</div>
+      <div class="hud-chip controls">Clique para andar · <b>WASD</b> · <b>E</b> para falar</div>
+      <div class="hud-chip">Cliente: <b>Rafaelly</b></div>
+      <div class="hud-spacer"></div>
+      <div class="hud-chip">IA: <b id="hudProvider">OpenRouter</b> · <span id="hudModel">openrouter/auto</span></div>
+      <button id="settingsBtn" type="button">⚙ Inteligência</button>
     </div>
 
-    <div class="game-wrap">
-      <div class="canvas-frame">
-        <canvas id="game" aria-label="Escritório 2D jogável do Agency OS"></canvas>
-        <div id="interact" class="interact"></div>
+    <div id="interaction" class="interaction"><span class="key">E</span><span id="interactionText">Falar</span></div>
 
-        <div class="mobile-controls" aria-label="Controles de movimento">
-          <button id="up" class="up" type="button">▲</button>
-          <button id="left" class="left" type="button">◀</button>
-          <button id="down" class="down" type="button">▼</button>
-          <button id="right" class="right" type="button">▶</button>
-        </div>
-        <button id="talkBtn" class="talk-btn" type="button">Falar</button>
-      </div>
+    <div class="mobile-controls">
+      <button id="up" class="up" type="button">▲</button>
+      <button id="left" class="left" type="button">◀</button>
+      <button id="down" class="down" type="button">▼</button>
+      <button id="right" class="right" type="button">▶</button>
     </div>
+    <button id="talkMobile" class="talk-mobile" type="button">Falar</button>
 
-    <div id="settings" class="settings" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+    <div id="settings" class="settings" role="dialog" aria-modal="true">
       <div class="settings-card">
-        <h3 id="settingsTitle">Configuração da IA</h3>
+        <h3>Inteligência do Agency OS</h3>
+        <p>Escolha o gateway e o modelo aqui. A Vercel guarda apenas as credenciais.</p>
+
+        <div class="provider-cards">
+          <div class="provider-card">
+            <strong>OpenRouter</strong>
+            <span>Centenas de modelos/provedores por uma API.</span>
+            <div class="provider-status" id="openrouterHint">Env: OPENROUTER_API_KEY</div>
+          </div>
+          <div class="provider-card">
+            <strong>Vercel AI Gateway</strong>
+            <span>Roteamento, observabilidade e failover na Vercel.</span>
+            <div class="provider-status" id="vercelHint">Env: AI_GATEWAY_API_KEY</div>
+          </div>
+        </div>
 
         <div class="field">
-          <label for="model">Modelo</label>
-          <select id="model">
-            <option value="gpt-5.6-luna">GPT-5.6 Luna · econômico</option>
-            <option value="gpt-5.6-terra">GPT-5.6 Terra · equilíbrio</option>
-            <option value="gpt-5.6-sol">GPT-5.6 Sol · máxima capacidade</option>
+          <label for="provider">Gateway</label>
+          <select id="provider">
+            <option value="openrouter">OpenRouter</option>
+            <option value="vercel">Vercel AI Gateway</option>
           </select>
         </div>
 
         <div class="field">
-          <label for="apiKey">Vercel AI Gateway Key temporária</label>
-          <input id="apiKey" type="password" autocomplete="off" placeholder="Cole sua AI Gateway key...">
+          <label for="model">Modelo</label>
+          <input id="model" list="modelOptions" placeholder="provider/model">
+          <datalist id="modelOptions"></datalist>
+          <span id="modelStatus" class="field-note">Carregando catálogo...</span>
         </div>
 
-        <p class="help">
-          Opcional na Vercel: configure <b>AI_GATEWAY_API_KEY</b> em Project Settings → Environment Variables. Se você prefere informar a chave aqui no Office, não precisa criar essa variável.
-          A chave digitada aqui fica apenas na memória desta aba, é enviada ao seu endpoint <code>/api/chat</code> e usada no Vercel AI Gateway.
-          Ela não é gravada no localStorage.
-        </p>
+        <div class="field">
+          <label id="keyLabel" for="apiKey">API Key temporária (opcional)</label>
+          <input id="apiKey" type="password" autocomplete="off" placeholder="deixe vazio para usar a variável da Vercel">
+          <span class="field-note">A chave digitada aqui fica apenas na memória desta aba. Não é salva no localStorage.</span>
+        </div>
 
         <div class="actions">
-          <button id="saveSettings" class="primary" type="button">Salvar configuração</button>
-          <button id="clearKey" type="button">Remover chave temporária</button>
+          <button id="saveSettings" class="primary" type="button">Usar esta configuração</button>
+          <button id="clearKey" type="button">Limpar chave temporária</button>
           <button id="closeSettings" type="button">Fechar</button>
         </div>
       </div>
@@ -73,15 +80,16 @@
 
   <aside class="side">
     <header class="side-head">
-      <div class="agent-title">
+      <div class="agent-head">
         <div id="portrait" class="portrait">OR</div>
-        <div>
+        <div class="agent-meta">
           <h2 id="agentName">Orion</h2>
           <p id="agentRole">Chief Orchestrator</p>
         </div>
-        <span id="agentStatus" class="agent-status">WORKING</span>
+        <span id="agentStatus" class="state working">WORKING</span>
       </div>
-      <div id="agentTask" class="task">Coordena Jobs, decisões e handoffs</div>
+
+      <div class="task-card"><span>Trabalhando agora</span><b id="agentTask">Coordena Jobs, decisões e handoffs</b></div>
 
       <div class="tabs">
         <button class="primary" type="button" data-pane="chat">Conversa</button>
@@ -91,39 +99,28 @@
     </header>
 
     <main id="panel" class="panel">
-      <section id="chatPane" class="pane active">
-        <div id="messages" class="messages"></div>
-      </section>
-
-      <section id="logsPane" class="pane">
-        <div id="logs"></div>
-      </section>
-
+      <section id="chatPane" class="pane active"><div id="messages" class="messages"></div></section>
+      <section id="logsPane" class="pane"><div id="logs" class="logs"></div></section>
       <section id="handoffPane" class="pane">
-        <div class="handoff-box">
-Handoff-first:
-1. converse com qualquer agente;
-2. se ele precisar de outro especialista, a IA gera o handoff;
-3. o contexto chega ao agente de destino;
-4. Orion recebe registro da transferência;
-5. você também pode copiar o pacote para continuar comigo no ChatGPT.
+        <div class="handoff-card">
+          <b>Handoff-first</b><br><br>
+          Quando um agente precisa de outro especialista, ele transfere contexto, tarefa e motivo ao agente de destino. Orion recebe o registro. O Office desenha a transferência no mapa e mantém o histórico.
         </div>
-        <div class="actions">
-          <button id="copyHandoff" class="primary" type="button">Copiar handoff para ChatGPT</button>
-        </div>
+        <div class="actions"><button id="copyHandoff" class="primary" type="button">Copiar handoff para o ChatGPT</button></div>
       </section>
     </main>
 
     <footer class="composer">
-      <textarea id="message" placeholder="Fale com o agente selecionado..."></textarea>
+      <textarea id="message" placeholder="Chegue perto de um agente e converse com ele..."></textarea>
       <div class="actions">
         <button id="send" class="primary" type="button">Enviar</button>
-        <span class="badge">Chegue perto + E para trocar de agente.</span>
+        <span id="chatProvider" class="small">OpenRouter · openrouter/auto</span>
       </div>
     </footer>
   </aside>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/phaser@3.88.2/dist/phaser.min.js"></script>
 <script type="module" src="./game.js"></script>
 </body>
 </html>
