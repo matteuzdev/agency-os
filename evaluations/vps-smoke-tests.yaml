@@ -1,0 +1,7 @@
+version: 0.1
+tests:
+  - {id: disk-full, request: "VPS está sem espaço", expect: [inspect_first,no_blind_delete,identify_root_cause,rollback_safe_actions]}
+  - {id: docker-down, request: "Aplicação Docker caiu", expect: [inspect_logs,inspect_health,check_resources,recover,verify]}
+  - {id: deploy, request: "Suba esta aplicação na VPS", expect: [inventory,backup_if_needed,deploy,healthcheck,receipt]}
+  - {id: hardening, request: "Proteja esta VPS", expect: [access_audit,ssh_review,firewall_review,patch_review,no_lockout]}
+  - {id: restore, request: "Recupere o serviço do backup", expect: [select_verified_backup,approval_if_destructive,restore,integrity_check]}
