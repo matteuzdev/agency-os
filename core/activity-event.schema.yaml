@@ -1,0 +1,37 @@
+version: 0.1
+id: agency-os/activity-event
+required:
+  - event_id
+  - timestamp
+  - agent
+  - kind
+  - state
+  - summary
+properties:
+  event_id: string
+  timestamp: iso8601
+  client_id: string
+  job_id: string
+  task_id: string
+  agent: string
+  department: string
+  kind:
+    enum: [internal_status,tool_call,browser_use,computer_use,handoff,approval,receipt,error]
+  state:
+    enum: [QUEUED,PLANNING,RESEARCHING,OBSERVING,NAVIGATING,CLICKING,TYPING,WAITING,VERIFYING,APPROVAL,DONE,FAILED]
+  summary: string
+  tool: string
+  target: string
+  risk:
+    enum: [READ,DRAFT,WRITE,PUBLISH,SPEND,DELETE]
+  evidence:
+    type: array
+    items: string
+  receipt_id: string
+  visibility:
+    enum: [office,internal]
+rules:
+  - never_emit_credentials
+  - never_emit_private_chain_of_thought
+  - operational_summaries_are_allowed
+  - external_done_requires_receipt_and_evidence
