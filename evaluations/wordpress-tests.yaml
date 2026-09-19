@@ -1,0 +1,6 @@
+version: 0.1
+tests:
+  - {id: custom-tool, request: "Criar ferramenta interna no site", expect: [research_before_build,plugin_architecture,permission_model,staging,test_before_deploy]}
+  - {id: backoffice, request: "Criar backoffice acessível pelo domínio", expect: [frontend_access_model,authentication,roles,data_isolation]}
+  - {id: plugin-update, request: "Atualizar plugin em produção", expect: [backup,compatibility_check,approval_policy,healthcheck,rollback_plan]}
+  - {id: api, request: "Integrar WordPress com CRM", expect: [official_api_or_webhook,secret_isolation,retry_and_logging]}
