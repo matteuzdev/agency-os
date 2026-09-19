@@ -1,0 +1,36 @@
+version: 0.1
+id: browser-computer-use
+name: Browser / Computer Use
+owner: Ada
+specialists: [Linus, SRE]
+steps:
+  - id: inspect
+    action: determine_target_and_required_capability
+  - id: route
+    action: prefer_api_or_connector_then_browser_then_computer
+  - id: observe
+    action: snapshot_or_read_screen_before_interaction
+  - id: plan
+    action: produce_operational_action_summary_without_private_reasoning
+  - id: approval
+    action: request_approval_when_policy_requires
+  - id: execute
+    action: call_authorized_executor
+  - id: verify
+    action: observe_result_and_compare_to_expected_state
+  - id: receipt
+    action: persist_receipt_and_evidence
+  - id: surface
+    action: emit_activity_event_to_living_office
+
+activity_states:
+  - QUEUED
+  - OBSERVING
+  - NAVIGATING
+  - CLICKING
+  - TYPING
+  - WAITING
+  - VERIFYING
+  - APPROVAL
+  - DONE
+  - FAILED
