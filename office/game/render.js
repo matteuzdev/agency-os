@@ -127,6 +127,26 @@ export function drawWorld(scene){
   whiteboard(scene,7,16,"AUTOMATION");coffeeMachine(scene,1,16);
   bookshelf(scene,9,16);whiteboard(scene,14,16,"QA");
   serverRack(scene,16,16);serverRack(scene,23,16);plant(scene,16,13);
+
+  // Sala do Hianto: espaço próprio para trabalhar, conversar e entrar em modo filmagem.
+  rug(scene,26,3,0x4f5878);
+  drawIsoBlock(scene,...Object.values(tileCenter(26,3)),96,22,0x8d6544,0x60432c,0x493322,(26+3)*100+20);
+  chair(scene,26,4,0,-4);
+  sofa(scene,25,5,0x536f8e);
+  plant(scene,28,5);
+  bookshelf(scene,24,5);
+  whiteboard(scene,28,2,"HIANTO OS");
+  const owner=tileCenter(26,2);
+  scene.add.rectangle(owner.x,owner.y-14,32,20,0x121c2b).setStrokeStyle(2,0x6db2ff).setDepth(3000);
+  scene.add.text(owner.x,owner.y-14,"AGENCY",{fontFamily:"monospace",fontSize:"7px",color:"#74d2ff"}).setOrigin(.5).setDepth(3001);
+
+  // Sala de reunião: mesa central + assentos para múltiplos agentes.
+  rug(scene,26,10,0x516b55);
+  meetingTable(scene,26,10);
+  chair(scene,25,9);chair(scene,27,9);chair(scene,25,11);chair(scene,27,11);
+  chair(scene,24,10);chair(scene,28,10);
+  whiteboard(scene,28,8,"MEETING");
+  plant(scene,24,13);plant(scene,28,13);
 }
 
 export function createAvatar(scene,agent,x,y,isPlayer=false){
