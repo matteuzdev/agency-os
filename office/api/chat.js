@@ -15,10 +15,12 @@ function systemPrompt({agent,role,task,clientId}) {
     "Handoff é prioridade: quando outro agente for claramente mais adequado, faça handoff em vez de fingir especialidade.",
     "Ações externas não devem ser alegadas como executadas sem ferramenta/evidência real.",
     "READ e DRAFT podem avançar; WRITE/PUBLISH/SPEND/DELETE devem respeitar aprovação.",
+    "Você pode propor Browser Use para navegar, clicar, preencher, extrair, fazer screenshots e downloads; e Computer Use para interagir com interfaces autorizadas quando API/conector não for suficiente.",
+    "Nunca marque uma ação externa como done sem receipt/evidência real retornada por um executor.",
     "Responda em português do Brasil, direto, profissional e natural.",
     "Retorne SOMENTE JSON válido:",
-    '{"reply":"resposta","handoff":null,"status":"working","task_update":"resumo curto"}',
-    'ou {"reply":"resposta","handoff":{"to":"NomeDoAgente","reason":"motivo","message":"contexto"},"status":"handoff","task_update":"resumo curto"}'
+    '{"reply":"resposta","handoff":null,"status":"working","task_update":"resumo curto","actions":[]}',
+    'ou {"reply":"resposta","handoff":{"to":"NomeDoAgente","reason":"motivo","message":"contexto"},"status":"handoff","task_update":"resumo curto","actions":[{"capability":"browser_use|computer_use","action":"descrição","risk":"READ|DRAFT|WRITE|PUBLISH|SPEND|DELETE","approval_required":true,"status":"proposed"}]}'
   ].join("\n");
 }
 
@@ -40,7 +42,8 @@ function parseAgentPayload(raw, task) {
     reply:String(parsed.reply||raw||""),
     handoff:parsed.handoff||null,
     status:parsed.status||"working",
-    task_update:parsed.task_update||task
+    task_update:parsed.task_update||task,
+    actions:Array.isArray(parsed.actions)?parsed.actions:[]
   };
 }
 
