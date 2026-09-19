@@ -10,6 +10,7 @@ export function showPane(name){
 
 export function updateAgentPanel(agent){
   setSelectedAgent(agent);
+  $("#agentPanel").classList.add("open");
   $("#portrait").textContent=agent.name.slice(0,2).toUpperCase();
   $("#agentName").textContent=agent.name;
   $("#agentRole").textContent=agent.role;
@@ -146,6 +147,18 @@ function bindSettings(){
 }
 
 export function bindUI(){
+  $("#closePanel").addEventListener("click",()=>$("#agentPanel").classList.remove("open"));
+  $("#openLogs").addEventListener("click",()=>{
+    $("#agentPanel").classList.add("open");
+    showPane("logs");
+  });
+  $("#openOrion").addEventListener("click",()=>{
+    const orion=AGENTS.find(a=>a.name==="Orion");
+    updateAgentPanel(orion);
+    showPane("chat");
+    window.__agencyOfficeScene?.setSelectedAgent(orion);
+  });
+
   document.querySelectorAll("[data-pane]").forEach(b=>b.addEventListener("click",()=>showPane(b.dataset.pane)));
   bindSettings();
 
