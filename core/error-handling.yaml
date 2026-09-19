@@ -1,0 +1,17 @@
+version: 0.1
+failure_policy:
+  classify: [transient,auth,rate_limit,validation,dependency,permission,provider_outage,unknown]
+  transient: {retry: exponential_backoff, max_attempts: 3}
+  auth: {retry: false, action: BLOCKED_CONNECTION}
+  rate_limit: {retry: provider_reset_or_backoff}
+  validation: {retry: false, action: return_to_agent}
+  permission: {retry: false, action: escalate}
+  provider_outage: {retry: scheduled, fallback: allowed_if_policy}
+  unknown: {retry: once, action: escalate_with_evidence}
+idempotency:
+  required_for: [publish,send,create_campaign,deploy,provision,webhook]
+rollback:
+  required_when_supported: true
+dead_letter:
+  enabled: true
+  preserve: [job_id,task_id,input_ref,error,evidence,retry_count]
