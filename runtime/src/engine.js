@@ -1,0 +1,7 @@
+export const RISK={READ:"read",DRAFT:"draft",WRITE:"write",PUBLISH:"publish",SPEND:"spend",DELETE:"delete"};
+export function approvalFor(risk,policy={}){const defaults={read:false,draft:false,write:true,publish:true,spend:true,delete:true};return policy[risk]??defaults[risk]??true}
+export function createJob({clientId,objective}){if(!clientId||!objective)throw new Error("clientId and objective required");return {id:"job_"+Date.now(),client_id:clientId,objective,status:"PLANNED",tasks:[],evidence:[],metrics:{},created_at:new Date().toISOString()}}
+export function createTask(job,{id,agent,capability,risk="read",input={}}){const task={id,agent,capability,risk,input,status:"QUEUED"};job.tasks.push(task);return task}
+export async function executeTask({job,task,connectors={},approval=()=>false}){const [family,action]=task.capability.split(".");const connector=connectors[family];if(!connector||typeof connector[action]!=="function"){task.status="BLOCKED_CONNECTION";return {status:task.status}}
+if(approvalFor(task.risk)&&!await approval({job,task})){task.status="APPROVAL";return {status:task.status}}
+task.status="RUNNING";try{const result=await connector[action](task.input,{job,task});task.status="DONE";const receipt={job_id:job.id,task_id:task.id,agent:task.agent,action:task.capability,status:"success",timestamp:new Date().toISOString(),evidence:result?.evidence??null};job.evidence.push(receipt);return {status:task.status,result,receipt}}catch(error){task.status="FAILED";return {status:task.status,error:String(error)}}}
