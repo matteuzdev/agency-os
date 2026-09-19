@@ -1,0 +1,15 @@
+version: 0.1
+capabilities:
+  ssh: [connect,run_command,read_file,write_file,upload,download]
+  host: [system_info,processes,services,packages,users,storage,memory,cpu,network]
+  container_runtime: [list_containers,inspect,logs,pull,build,deploy,restart,stop,networks,volumes]
+  reverse_proxy: [inspect_routes,configure_route,reload,certificate_status]
+  dns: [read_records,create_record,update_record]
+  monitoring: [read_metrics,read_logs,create_alert,healthcheck]
+  backup: [create_backup,list_backups,verify_backup,restore_test,restore]
+safety:
+  - secrets_via_secret_manager_only
+  - no_public_docker_socket
+  - destructive_actions_require_policy_gate
+  - backup_and_rollback_before_high_risk_change
+  - evidence_after_every_mutation
