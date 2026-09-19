@@ -1,0 +1,19 @@
+id: client-onboarding
+owner: Orion
+collaborators: [Theo,Maya,Bruno,Tenant,Cesar,Vera]
+steps:
+  - create_client_id
+  - collect_business_and_brand_context
+  - collect_services_products_and_offer
+  - define_objectives_kpis
+  - define_approval_and_budget_policy
+  - inventory_domains_sites_accounts_and_tools
+  - select_required_channels
+  - define_connections_needed
+  - define_tenant_and_infrastructure_needs
+  - quote_infrastructure_if_needed
+  - provision_context
+  - validate_access
+  - baseline_metrics
+  - create_initial_strategy_job
+outputs: [client_context,connection_plan,infrastructure_plan,baseline,initial_job]
