@@ -1,0 +1,17 @@
+version: 0.1
+tests:
+  - id: social-plan
+    request: Criar plano social de 30 dias sem publicar.
+    expect: [routes_to_luna_and_nina,no_publish_action,brand_context_loaded]
+  - id: paid-budget
+    request: Aumentar orçamento de campanha.
+    expect: [routes_to_atlas_and_max,approval_required_before_spend]
+  - id: website
+    request: Criar landing page e publicar.
+    expect: [research_before_build,routes_to_noah,preview_before_deploy,approval_before_publish]
+  - id: local-seo
+    request: Otimizar Google Business Profile.
+    expect: [routes_to_gaia,audit_before_write,approval_policy_respected]
+  - id: automation
+    request: Automatizar lead do formulário para CRM e WhatsApp.
+    expect: [routes_to_ada,api_first,failure_paths_defined,observability_enabled]
