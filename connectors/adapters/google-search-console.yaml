@@ -1,0 +1,6 @@
+id: google-search-console
+family: search
+status: scaffold
+auth: oauth2
+capabilities: [read_search_performance]
+required_runtime_config: [oauth_connection,property_selection]
