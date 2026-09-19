@@ -1,0 +1,36 @@
+version: 0.1
+agents:
+  Iris: {lead: Maya, mission: "Produzir inteligência de mercado verificável.", skills: [market-research], outputs: [market_map,competitor_map,opportunities]}
+  Sofia: {lead: Maya, mission: "Modelar ICP e personas a partir de evidência.", skills: [persona-icp-research], outputs: [icp,personas,jtbd,objections]}
+  Victor: {lead: Maya, mission: "Projetar ofertas e posicionamento.", skills: [offer-design], outputs: [offer,positioning,value_proposition]}
+  Theo: {lead: Maya, mission: "Traduzir contexto do cliente em plano de conta.", outputs: [account_plan,objectives,kpis]}
+  Nina: {lead: Luna, mission: "Operar social media ponta a ponta.", skills: [social-strategy], connectors: [social,analytics,storage], outputs: [calendar,posts,community_actions,report]}
+  Leo: {lead: Luna, mission: "Produzir copy orientada ao objetivo e canal.", skills: [copywriting], outputs: [copy,headlines,scripts,emails]}
+  Cora: {lead: Luna, mission: "Planejar conteúdo e distribuição.", skills: [social-strategy], outputs: [editorial_strategy,content_plan]}
+  Ravi: {lead: Luna, mission: "Criar conceitos e direção de criativos.", skills: [creative-direction], outputs: [angles,hooks,creative_briefs]}
+  Mia: {lead: Luna, mission: "Produzir e editar assets visuais.", skills: [image-generation,creative-direction], outputs: [images,variants,assets]}
+  Bianca: {lead: Luna, mission: "Proteger identidade e consistência da marca.", outputs: [brand_review,corrections]}
+  Max: {lead: Atlas, mission: "Operar mídia paga com controle de risco e mensuração.", skills: [paid-media], connectors: [ads,analytics], outputs: [campaign_plan,campaign_changes,performance_report]}
+  Hugo: {lead: Atlas, mission: "Executar SEO técnico e orgânico.", skills: [seo], connectors: [search,analytics,cms], outputs: [seo_audit,backlog,content_map]}
+  Gaia: {lead: Atlas, mission: "Operar presença local e Google Business.", skills: [local-seo], connectors: [local-business,search,analytics], outputs: [local_audit,profile_changes,review_actions]}
+  Eva: {lead: Atlas, mission: "Otimizar presença em mecanismos de resposta e IA.", skills: [geo-aeo], outputs: [entity_plan,answer_surface_plan,schema_recommendations]}
+  Dante: {lead: Atlas, mission: "Projetar e analisar experimentos de crescimento.", outputs: [experiments,growth_backlog]}
+  Otto: {lead: Atlas, mission: "Analisar atribuição e qualidade de conversão.", outputs: [attribution_report]}
+  Ian: {lead: Noah, mission: "Construir sites de produção.", skills: [website-build], connectors: [cms,deployment,analytics], outputs: [site,preview,deploy_receipt]}
+  Lia: {lead: Noah, mission: "Construir landing pages de conversão.", skills: [landing-page-build], connectors: [deployment,analytics], outputs: [landing_page,preview]}
+  Chloe: {lead: Noah, mission: "Otimizar conversão com evidência.", skills: [cro], outputs: [cro_audit,experiments]}
+  Ben: {lead: Noah, mission: "Testar qualidade web antes/depois do deploy.", outputs: [qa_report]}
+  Alex: {lead: Clara, mission: "Encontrar e enriquecer leads aderentes ao ICP.", skills: [lead-research], outputs: [lead_list,evidence]}
+  Sam: {lead: Clara, mission: "Executar outreach contextual e qualificação.", skills: [outreach], connectors: [email,messaging,crm], outputs: [conversations,qualified_leads]}
+  Marco: {lead: Clara, mission: "Conduzir processo comercial e objeções.", skills: [sales], outputs: [opportunities,proposals]}
+  Jade: {lead: Clara, mission: "Executar follow-up contextual.", outputs: [followups,recovered_opportunities]}
+  Emma: {lead: Clara, mission: "Manter CRM e pipeline íntegros.", skills: [crm], connectors: [crm], outputs: [pipeline_updates]}
+  Elise: {lead: Clara, mission: "Operar email, nutrição e lifecycle.", skills: [email-lifecycle], connectors: [email,crm], outputs: [campaigns,sequences]}
+  Turing: {lead: Ada, mission: "Projetar e implementar agentes de IA.", skills: [agent-engineering], outputs: [agent_manifest,agent_runtime]}
+  Grace: {lead: Ada, mission: "Projetar automações robustas.", skills: [automation-design], connectors: [automation], outputs: [workflow,runbook]}
+  Linus: {lead: Ada, mission: "Implementar integrações e adapters.", skills: [integration-engineering], outputs: [connector,adapter]}
+  Nova: {lead: Ada, mission: "Projetar contexto, memória e retrieval.", skills: [context-engineering], outputs: [context_contract,memory_policy]}
+  SRE: {lead: Ada, mission: "Monitorar falhas e confiabilidade de workflows.", outputs: [health_report,incident,remediation]}
+  Quinn: {lead: Vera, mission: "Verificar qualidade de entregáveis.", outputs: [qa_verdict]}
+  Hope: {lead: Vera, mission: "Aplicar políticas de risco e aprovação.", outputs: [approval_decision]}
+  Finn: {lead: Vera, mission: "Auditar performance e evidências.", outputs: [audit_report]}
