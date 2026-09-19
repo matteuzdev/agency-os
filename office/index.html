@@ -30,6 +30,24 @@
     </div>
     <button id="talkMobile" class="talk-mobile" type="button">Falar</button>
 
+    <div class="live-activity" id="liveActivity">
+      <span class="live-dot"></span>
+      <b id="activityAgent">SYSTEM</b>
+      <span id="activityText">Office online</span>
+      <span id="activityProof" class="activity-proof internal">INTERNO</span>
+    </div>
+
+    <div class="command-dock">
+      <button id="goMyRoom" type="button">🏠 Minha Sala</button>
+      <button id="goMeeting" type="button">🪑 Reunião</button>
+      <input id="globalCommand" type="text" list="agentMentions" placeholder="@Maya @Mia reunião sobre campanha...">
+      <datalist id="agentMentions"></datalist>
+      <button id="callMentioned" class="primary" type="button">Chamar</button>
+      <button id="recordRoom" type="button">🎥 Filmar sala</button>
+      <button id="openLogs" type="button">📋</button>
+      <button id="openOrion" type="button">🧭</button>
+    </div>
+
     <div id="settings" class="settings" role="dialog" aria-modal="true">
       <div class="settings-card">
         <h3>Inteligência do Agency OS</h3>
@@ -84,7 +102,8 @@
   </section>
 
   <aside class="side" id="agentPanel">
-    <header class="side-head">\n      <button id="closePanel" type="button" class="panel-close" aria-label="Fechar conversa">×</button>
+    <header class="side-head">
+      <button id="closePanel" type="button" class="panel-close" aria-label="Fechar conversa">×</button>
       <div class="agent-head">
         <div id="portrait" class="portrait">OR</div>
         <div class="agent-meta">
@@ -98,6 +117,7 @@
 
       <div class="tabs">
         <button class="primary" type="button" data-pane="chat">Conversa</button>
+        <button type="button" data-pane="meeting">Reunião</button>
         <button type="button" data-pane="logs">Logs</button>
         <button type="button" data-pane="handoff">Handoff</button>
       </div>
@@ -105,6 +125,13 @@
 
     <main id="panel" class="panel">
       <section id="chatPane" class="pane active"><div id="messages" class="messages"></div></section>
+      <section id="meetingPane" class="pane">
+        <div id="meetingParticipants" class="meeting-participants"></div>
+        <div id="meetingTranscript" class="messages"></div>
+        <div class="actions">
+          <button id="endMeeting" type="button">Encerrar reunião</button>
+        </div>
+      </section>
       <section id="logsPane" class="pane"><div id="logs" class="logs"></div></section>
       <section id="handoffPane" class="pane">
         <div class="handoff-card">
